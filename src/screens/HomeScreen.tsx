@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { GradientContainer, UIImage, UIText, UITextInput, UITouchableOpacity, UIView } from '../components';
+import {
+  GradientContainer,
+  ProgressBar,
+  UIImage,
+  UIText,
+  UITextInput,
+  UITouchableOpacity,
+  UIView,
+} from '../components';
 import { useBoolean, useDebounceCallback, useToggle } from '../hooks';
 import { getBgWhite } from '../styles';
 
@@ -95,9 +103,10 @@ export function HomeScreen() {
             </UIView>
           ) : null}
         </UIView>
-        {/** TODO: Improve load design */}
         {isFetching || !forecast ? (
-          <UIText>Loading...</UIText>
+          <UIView className="flex-1 flex-col justify-center items-center">
+            <ProgressBar indeterminate color="white" thickness={10} size={160} />
+          </UIView>
         ) : (
           <>
             {/** Forecast Section */}

@@ -3,7 +3,7 @@ import { GradientContainer, UIImage, UIText, UITextInput, UITouchableOpacity, UI
 import { useBoolean, useDebounceCallback, useToggle } from '../hooks';
 import { getBgWhite } from '../styles';
 
-import { ScrollView } from 'react-native';
+import { Keyboard, ScrollView } from 'react-native';
 import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
 import { CalendarDaysIcon, MapPinIcon } from 'react-native-heroicons/solid';
 import { getForecast, getLocations } from '../api/http';
@@ -36,6 +36,7 @@ export function HomeScreen() {
 
   function handleSelectLocation(location: LocationModel) {
     return () => {
+      Keyboard.dismiss();
       setLocations([]);
       fetchLocationForecast(location.name);
     };
@@ -51,7 +52,7 @@ export function HomeScreen() {
 
   return (
     <GradientContainer>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ flexGrow: 1 }}>
         {/** Search Section */}
         <UIView className="mx-4 my-3 z-50 h-[7%]">
           <UIView
